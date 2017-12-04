@@ -38,7 +38,8 @@ class TokenCounter(luigi.Task):
         os.system('python pipeline/sentence_to_tokens.py')
 
     def output(self):
-        return luigi.LocalTarget('pipeline/data/tokens.json')
+        pipeline = os.environ['PIPELINE']
+        return luigi.LocalTarget('pipeline/data/tokens_{}.json'.format(pipeline))
 
 class TokenVector(luigi.Task):
     def requires(self):
@@ -48,7 +49,8 @@ class TokenVector(luigi.Task):
         os.system('python pipeline/tokens_to_vec.py')
 
     def output(self):
-        return luigi.LocalTarget('pipeline/data/tokens.csv')
+        pipeline = os.environ['PIPELINE']
+        return luigi.LocalTarget('pipeline/data/tokens_{}.csv'.format(pipeline))
 
 if __name__ == '__main__':
     luigi.run(["--local-scheduler"], main_task_cls=TokenVector)

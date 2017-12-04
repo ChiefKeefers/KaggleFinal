@@ -5,19 +5,32 @@ do
     echo ""
     echo "  Usage: keef [command]"
     echo ""
-    echo "      data        begins the data pipeline"
-    echo "      test        Runs tests"
+    echo "      data train    begins the training data pipeline"
+    echo "      data test     begins the testing data pipeline"
+    echo "      test          Runs tests"
     echo ""
     break
 done
 
 # Parse argument
-while [[ $# == 1 ]]
+while [[ $# -le 2 ]]
 do
     arg="$1"
     case $arg in
         data)
-            python pipeline/tasks.py
+            arg2="$2"
+            case $arg2 in
+                test)
+                    echo "Running test pipeline"
+                    PIPELINE=test python pipeline/tasks.py
+                    shift
+                    ;;
+                train)
+                    echo "Running train pipeline"
+                    PIPELINE=train python pipeline/tasks.py
+                    shift
+                    ;;
+            esac 
             shift
             ;;
 	test)

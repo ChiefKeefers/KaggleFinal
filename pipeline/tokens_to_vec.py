@@ -2,8 +2,11 @@ import json
 import numpy as np
 import pandas as pd
 from functools import reduce 
+import os
 
-with open('data/tokens.json', 'r') as f:
+pipeline = os.environ['PIPELINE']
+
+with open('pipeline/data/tokens_{}.json'.format(pipeline), 'r') as f:
      tokens = json.load(f)
 """
 tokens = {
@@ -22,4 +25,4 @@ for img_num, sentence in tokens.items():
         token_matrix[int(img_num)][columns.index(token)] = sentence[token]
 
 df = pd.DataFrame(token_matrix, columns=columns)
-df.to_csv('data/tokens.csv')
+df.to_csv('pipeline/data/tokens_{}.csv'.format(pipeline))

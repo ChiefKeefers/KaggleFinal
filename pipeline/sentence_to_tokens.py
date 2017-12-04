@@ -26,6 +26,7 @@ def build_tokens(file_location):
     return file_num
 
 if __name__=="__main__":
+    pipeline = os.environ['PIPELINE']
     import time;
     start = time.time()
     print("\nProgram Begin")
@@ -33,12 +34,12 @@ if __name__=="__main__":
     print("Estimated time: 15 min. with 36 cores")
     cleaner = SentenceCleaner()
     rows = list()
-    description_files = glob('data/descriptions_train/*.txt')
+    description_files = glob('data/descriptions_{}/*.txt'.format(pipeline))
     
     with cfs.ThreadPoolExecutor() as executor:
         futures = executor.map(build_tokens, description_files)
     
-    with open('data/tokens.json', 'w') as f:
+    with open('data/tokens_{}.json'.format(pipeline), 'w') as f:
         json.dump(features, f)
     
     print("took", time.time() - start, "seconds")
