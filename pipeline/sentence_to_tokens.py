@@ -39,7 +39,7 @@ if __name__=="__main__":
     with cfs.ThreadPoolExecutor() as executor:
         futures = executor.map(build_tokens, description_files)
     
-    with open('data/tokens_{}.json'.format(pipeline), 'w') as f:
+    with open('pipeline/data/tokens_{}.json'.format(pipeline), 'w') as f:
         json.dump(features, f)
     
     print("took", time.time() - start, "seconds")
