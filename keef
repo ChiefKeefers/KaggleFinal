@@ -5,34 +5,28 @@ do
     echo ""
     echo "  Usage: keef [command]"
     echo ""
-    echo "      data train    begins the training data pipeline"
-    echo "      data test     begins the testing data pipeline"
+    echo "      data_train    begins the training data pipeline"
+    echo "      data_test     begins the testing data pipeline"
     echo "      test          Runs tests"
     echo ""
     break
 done
 
 # Parse argument
-while [[ $# -le 2 ]]
+while [[ $# -le 1 ]]
 do
     arg="$1"
     case $arg in
-        data)
-            arg2="$2"
-            case $arg2 in
-                test)
-                    echo "Running test pipeline"
-                    PIPELINE=test python pipeline/tasks.py
-                    shift
-                    ;;
-                train)
-                    echo "Running train pipeline"
-                    PIPELINE=train python pipeline/tasks.py
-                    shift
-                    ;;
-            esac 
-            shift
-            ;;
+        data_train)
+       		echo "Running test pipeline"
+        	PIPELINE=train python pipeline/tasks.py
+                shift
+                ;;
+        data_test)
+                echo "Running train pipeline"
+                PIPELINE=test python pipeline/tasks.py
+                shift
+                ;;
 	test)
 	    nosetests --with-specplugin
 	    shift
