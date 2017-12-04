@@ -18,12 +18,12 @@ do
     arg="$1"
     case $arg in
         data_train)
-       		echo "Running test pipeline"
+       		echo "Running train pipeline"
         	PIPELINE=train python pipeline/tasks.py
                 shift
                 ;;
         data_test)
-                echo "Running train pipeline"
+                echo "Running test pipeline"
                 PIPELINE=test python pipeline/tasks.py
                 shift
                 ;;
