@@ -2,3 +2,6 @@ __pycache__
 venv
 data
 .ipynb_checkpoints
+tokens.csv
+tokens_test.csv
+.DS_Store
